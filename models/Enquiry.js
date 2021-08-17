@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const EnquirySchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true,
-        trim: true
-    },
     reason: {
         type: String,
         required: true,
