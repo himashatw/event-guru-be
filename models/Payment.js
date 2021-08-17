@@ -19,7 +19,7 @@ const PaymentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    users: [{ type: mongoose.Schema.Types.ObjectId, required: false, ref: 'Users' }]
+    users: [{ type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Users' }]
 });
 
 const Payment = mongoose.model('Payments', PaymentSchema);

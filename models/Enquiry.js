@@ -15,7 +15,7 @@ const EnquirySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    users: [{ type: mongoose.Schema.Types.ObjectId, required: false, ref: 'Users' }]
+    users: [{ type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Users' }]
 });
 
 const Enquiry = mongoose.model('Enquiries', EnquirySchema);
