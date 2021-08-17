@@ -1,22 +1,26 @@
 const mongoose = require('mongoose');
 
-const EnquirySchema = new mongoose.Schema({
-    email: {
+const PaymentSchema = new mongoose.Schema({
+    cardNo: {
         type: String,
         required: true,
         trim: true
     },
-    reason: {
+    cardHolderName: {
         type: String,
         required: true,
         trim: true
     },
-    date: {
+    expireDate: {
+        type: String,
+        required: true
+    },
+    cvv: {
         type: String,
         required: true
     },
     users: [{ type: mongoose.Schema.Types.ObjectId, required: false, ref: 'Users' }]
 });
 
-const Enquiry = mongoose.model('Enquiries', EnquirySchema);
-module.exports = Enquiry;
+const Payment = mongoose.model('Payments', PaymentSchema);
+module.exports = Payment;

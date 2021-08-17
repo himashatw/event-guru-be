@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../../models/User');
+const ContactUs = require('../../models/ContactUs');
 
 
 router.post('/login', async (req, res) => {
@@ -38,9 +39,12 @@ router.post('/register', async (req, res) => {
         })
 })
 
-router.post('/contactus', async (req, res) => {
-    const attendee = new Attendee(req.body);
-    await attendee.save()
+/**
+ * contactus api 
+ */
+router.post('/visitor/contactus', async (req, res) => {
+    const contactUs = new ContactUs(req.body);
+    await contactUs.save()
         .then(data => {
             res.status(201).send({ data: data });
         })
@@ -49,4 +53,4 @@ router.post('/contactus', async (req, res) => {
         })
 })
 
-export default router;
+module.exports = router;
