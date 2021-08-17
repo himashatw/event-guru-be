@@ -4,9 +4,13 @@ const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 const mongoose = require("mongoose");
 const { MONGO_URL } = require("./keys");
+const organizerRoute = require("./routes/EventOrganizer/organizerRoutes.js");
+
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/api/organizer", organizerRoute);
 
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
