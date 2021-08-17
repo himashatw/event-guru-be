@@ -3,8 +3,8 @@ const router = express.Router();
 const Enquiry = require('../../models/Enquiry');
 
 router.post('/add', async (req, res) => {
-    const attendee = new Attendee(req.body);
-    await attendee.save()
+    const enquiry = new Enquiry(req.body);
+    await enquiry.save()
         .then(data => {
             res.status(201).send({ data: data });
         })
@@ -14,9 +14,9 @@ router.post('/add', async (req, res) => {
 })
 
 router.get('/all', async (req, res) => {
-    await Attendee.find({})
-        .then(attendees => {
-            res.status(200).send({ data: attendees })
+    await Enquiry.find({})
+        .then(enquiry => {
+            res.status(200).send({ data: enquiry })
         }).catch(error => {
             res.status(400).send({ error: error.message })
         })
@@ -24,8 +24,8 @@ router.get('/all', async (req, res) => {
 })
 
 
-router.delete('/all', async (req, res) => {
-    await Attendee.find({})
+router.delete('/:id', async (req, res) => {
+    await Enquiry.find({})
         .then(attendees => {
             res.status(200).send({ data: attendees })
         }).catch(error => {
