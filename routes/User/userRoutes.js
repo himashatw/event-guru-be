@@ -28,7 +28,8 @@ router.post('/login', async (req, res) => {
     })
 })
 
-router.post('/register', async (req, res) => {
+/** user register api */
+router.post('/user/register', async (req, res) => {
     const user = new User(req.body);
     await user.save()
         .then(data => {
@@ -39,9 +40,7 @@ router.post('/register', async (req, res) => {
         })
 })
 
-/**
- * contactus api 
- */
+/** contactus api */
 router.post('/visitor/contactus', async (req, res) => {
     const contactUs = new ContactUs(req.body);
     await contactUs.save()
