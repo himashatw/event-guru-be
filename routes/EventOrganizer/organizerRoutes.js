@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const PackageRequest = require('../../models/PackageRequest.js');
+const EventOrganizer = require('../../models/EventOrganizer');
 
 /*** register the event oraganizer*/
 router.post('/register', async (req, res) => {
-    const user = new User(req.body);
-    await user.save()
+    const eventOrganizer = new EventOrganizer(req.body);
+    await eventOrganizer.save()
         .then(data => {
             res.status(201).send({ data: data });
         })
