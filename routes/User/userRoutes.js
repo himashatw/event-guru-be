@@ -37,6 +37,19 @@ router.post('/user/register', async (req, res) => {
         });
 });
 
+/** logged user data retrieve api */
+router.get('/user/:id', async (req, res) => {
+    const userId = req.params.id;
+    console.log("logged user id "+userId);
+    await User.find({_id:userId})
+        .then(data => {
+            res.status(201).send({ data: data });
+        })
+        .catch(error => {
+            res.status(400).send({ error: error.message });
+        });
+});
+
 // /** user update api */
 // router.put('/user/register', async (req, res) => {
 //     const user = new User(req.body);

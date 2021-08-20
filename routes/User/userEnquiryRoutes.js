@@ -17,8 +17,9 @@ router.post('/user/enquiry', async (req, res) => {
 /** get enquiry api */
 router.get('/user/enquiry/:id', async (req, res) => {
     //get real id into variable and set it
-    
-    await Enquiry.find({users:_id})
+    const userId = req.params.id;
+    console.log(userId);
+    await Enquiry.find({users:userId})
         .then(data => {
             res.status(200).send({ data: data })
         }).catch(error => {
@@ -28,9 +29,12 @@ router.get('/user/enquiry/:id', async (req, res) => {
 
 /** delete enquiry api */
 router.delete('/user/enquiry/:id', async (req, res) => {
-    await Enquiry.findByIdAndDelete()
-        .then(data => {
-            res.status(200).send({ data: data })
+    //get real id into variable and set it
+    const enquiryId = req.params.id;
+    console.log("deleted enquiry "+enquiryId);
+    await Enquiry.findByIdAndDelete({_id:enquiryId})
+        .then(() => {
+            res.status(200).json({ message: "enquiry deleted successfully" })
         }).catch(error => {
             res.status(400).send({ error: error.message })
         });

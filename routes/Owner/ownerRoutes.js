@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-import PropertyOwner from '../../models/PropertyOwner';
+//import PropertyOwner from '../../models/PropertyOwner';
 
 router.post('/register', async (req, res) => {
     const propertyOwner = new PropertyOwner(req.body);
