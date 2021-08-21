@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PropertyOwnerSchema = new mongoose.model({
+const PropertyOwnerSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
