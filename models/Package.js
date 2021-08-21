@@ -21,9 +21,9 @@ const PackageSchema = new mongoose.model({
     required: false,
   },
   packageVenue: {
-      type: String,
-      required:true,
-      rim: true,
+    type: String,
+    required: true,
+    trim: true,
   },
 });
 
