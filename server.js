@@ -28,6 +28,12 @@ mongoose.connection.on("error", () =>
 //user routes
 app.use("/api", require("./routes/User/userRoutes"));
 
+//user enquiry routes
+app.use("/api", require("./routes/User/userEnquiryRoutes"));
+
+//user property owaner routes
+app.use("/api/propertyOwner", require("./routes/Owner/ownerRoutes"));
+
 app.listen(PORT, () => {
   console.log("Server is running on port : " + PORT);
 });
