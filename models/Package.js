@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const PackageSchema = new mongoose.model({
   packageName: {
@@ -21,11 +21,11 @@ const PackageSchema = new mongoose.model({
     required: false,
   },
   packageVenue: {
-      type: String,
-      required:true,
-      rim: true,
+    type: String,
+    required: true,
+    rim: true,
   },
 });
 
 const Package = mongoose.model("Package", PackageSchema);
-export default Package;
+module.exports = Package;
