@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const PackageSchema = new mongoose.model({
+const PackageSchema = new mongoose.Schema({
   packageName: {
     type: String,
     required: true,
@@ -23,9 +23,9 @@ const PackageSchema = new mongoose.model({
   packageVenue: {
     type: String,
     required: true,
-    trim: true,
+    rim: true,
   },
 });
 
-const Package = mongoose.model("Package", PackageSchema);
-export default Package;
+const Package = mongoose.model("packages", PackageSchema);
+module.exports = Package;

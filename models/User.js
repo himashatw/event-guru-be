@@ -23,6 +23,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    ImageUrl: {
+        type: String,
+        required: false,
+        trim: true,
+      },
 });
 
 const User = mongoose.model('Users', UserSchema);

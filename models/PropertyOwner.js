@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const PropertyOwnerSchema = new mongoose.model({
   name: {
@@ -49,4 +49,4 @@ const PropertyOwnerSchema = new mongoose.model({
 });
 
 const PropertyOwner = mongoose.model("PropertyOwner", PropertyOwnerSchema);
-export default PropertyOwner;
+module.exports = PropertyOwner;

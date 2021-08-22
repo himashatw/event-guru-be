@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const PackageRequest = require('../../models/PackageRequest.js');
 const EventOrganizer = require('../../models/EventOrganizer');
-// const Package = require('../../models/Package.js');
+const Package = require('../../models/Package.js');
 
 /*** register the event oraganizer*/
 router.post('/register', async (req, res) => {
@@ -28,7 +28,7 @@ router.post('/pending/add', async (req, res) => {
 })
 /***Get all custom packages */
 router.get('/pending/requests', async (req, res) => {
-    await PackageRequest.find({})
+    await PackageRequest.find({ approve: "pending" })
         .then(data => {
             res.status(200).send({ data: data })
         }).catch(err => {
@@ -67,12 +67,12 @@ router.get('/custom/view/approval', async (req, res) => {
 })
 
 /**Get Package details for dispaly venue of create custom request */
-// router.get('/custom/view/venue', async (req, res) => {
-//     await Package.find({})
-//         .then(data => {
-//             res.status(200).send({ data: data })
-//         }).catch(err => {
-//             res.send(500).send({ data: err.message });
-//         })
-// })
+router.get('/custom/view/venue', async (req, res) => {
+    await Package.find({})
+        .then(data => {
+            res.status(200).send({ data: data })
+        }).catch(err => {
+            res.send(500).send({ data: err.message });
+        })
+})
 module.exports = router;
