@@ -5,7 +5,7 @@ const PropertyOwner = require('../../models/PropertyOwner');
 router.post('/login', async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    await PropertyOwner.findOne({ email: email, password: password }, (err, propertyOwner) => {
+    await PropertyOwner.findOne({ email: email, password: password, accountActive: true }, (err, propertyOwner) => {
         if (err) {
             console.log(err)
             return res.status(500).send({
@@ -14,7 +14,7 @@ router.post('/login', async (req, res) => {
         }
         if (!propertyOwner) {
             return res.status(404).send({
-                message: 'email or password is mismatch!',
+                message: 'Email or Password is Mismatch!',
             });
         }
         return res.status(200).send({
