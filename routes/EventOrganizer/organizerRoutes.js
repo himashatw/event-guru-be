@@ -5,6 +5,28 @@ const EventOrganizer = require('../../models/EventOrganizer');
 const Package = require('../../models/Package.js');
 const PropertyOwner = require('../../models/PropertyOwner.js');
 
+/** login the event oraganizer */
+router.post('/login', async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    await EventOrganizer.findOne({ email: email, password: password }, (err, eventOrganizer) => {
+        if (err) {
+            console.log(err)
+            return res.status(500).send({
+                errors: err.message
+            });
+        }
+        if (!eventOrganizer) {
+            return res.status(404).send({
+                message: 'email or password is mismatch!',
+            });
+        }
+        return res.status(200).send({
+            message: 'Login successfully'
+        });
+    });
+});
+
 /*** register the event oraganizer*/
 router.post('/register', async (req, res) => {
     const eventOrganizer = new EventOrganizer(req.body);
