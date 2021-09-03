@@ -19,11 +19,24 @@ const PackageSchema = new mongoose.Schema({
   packageOffer: {
     type: Number,
     required: false,
+    default: 0,
   },
   packageVenue: {
     type: String,
+    required: false,
+  },
+  participants: {
+    type: Number,
     required: true,
-    rim: true,
+  },
+  packageType: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  packagePrice: {
+    type: Number,
+    required: true,
   },
 });
 

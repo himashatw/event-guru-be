@@ -1,5 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+
 const PropertyOwner = require('../../models/PropertyOwner');
 const Package = require("../../models/Package");
 
@@ -25,15 +26,17 @@ router.post('/login', async (req, res) => {
     });
 });
 
-router.post('/register', async (req, res) => {
-    const propertyOwner = new PropertyOwner(req.body);
-    await propertyOwner.save()
-        .then(data => {
-            res.status(201).send({ data: data });
-        })
-        .catch(error => {
-            res.status(400).send({ error: error.message });
-        });
+
+router.post("/register", async (req, res) => {
+  const propertyOwner = new PropertyOwner(req.body);
+  await propertyOwner
+    .save()
+    .then((data) => {
+      res.status(201).send({ data: data });
+    })
+    .catch((error) => {
+      res.status(400).send({ error: error.message });
+    });
 });
 
 router.post("/newpackage", async (req, res) => {
@@ -59,3 +62,4 @@ router.post("/newpackage", async (req, res) => {
   });
   
   module.exports = router;
+

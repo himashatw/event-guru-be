@@ -31,6 +31,14 @@ const AdvertisementSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
+  adType: {
+    type: String,
+    required: true,
+  },
 });
 
 const Advertisement = mongoose.model("Advertisement", AdvertisementSchema);
