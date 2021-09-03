@@ -20,7 +20,8 @@ router.post('/user/login', async (req, res) => {
             });
         }
         return res.status(200).send({
-            message: 'Login successfully'
+            message: 'Login successfully',
+            user
         });
     });
 });
