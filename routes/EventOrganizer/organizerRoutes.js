@@ -51,7 +51,7 @@ router.post('/pending/add', async (req, res) => {
         })
 })
 
-/***Get all custom packages */
+/***Get all custom packages event organizer added */
 router.get('/pending/requests', async (req, res) => {
     await PackageRequest.find({ approve: "pending" })
         .then(data => {
@@ -61,7 +61,7 @@ router.get('/pending/requests', async (req, res) => {
         })
 })
 
-/***Update custom packages */
+/***Update custom packages, event organizer added*/
 router.put('/pending/update/:id', async (req, res) => {
     if (req.body && req.params.id) {
         await PackageRequest.findByIdAndUpdate(req.params.id, req.body, { useFindAndModify: false })
@@ -73,7 +73,7 @@ router.put('/pending/update/:id', async (req, res) => {
     }
 })
 
-/***delete custom package */
+/***delete custom package event organizer added*/
 router.delete('/pending/delete/:id', async (req, res) => {
     await PackageRequest.findByIdAndDelete(req.params.id)
         .then(data => {
@@ -83,7 +83,7 @@ router.delete('/pending/delete/:id', async (req, res) => {
         })
 })
 
-/**Get paticular Pending Packages */
+/**Get paticular Pending Packages for update,event organizer added*/
 router.get('/pending/get/:id', async (req, res) => {
     await PackageRequest.findById(req.params.id)
         .then(data => {
