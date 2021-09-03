@@ -18,7 +18,6 @@ router.post('/user/enquiry', async (req, res) => {
 router.get('/user/enquiry/:id', async (req, res) => {
     //get real id into variable and set it
     const userId = req.params.id;
-    console.log(userId);
     await Enquiry.find({users:userId})
         .then(data => {
             res.status(200).send({ data: data })
