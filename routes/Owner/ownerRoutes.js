@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const PropertyOwner = require('../../models/PropertyOwner');
+const Package = require("../../models/Package");
 
 router.post('/login', async (req, res) => {
     const email = req.body.email;
@@ -35,4 +36,26 @@ router.post('/register', async (req, res) => {
         });
 });
 
-module.exports = router;
+router.post("/newpackage", async (req, res) => {
+    const newPackage = new Package(req.body);
+    await newPackage
+      .save()
+      .then((result) => {
+        res.status(200).json({ result });
+      })
+      .catch((error) => {
+        res.status(422).json({ error });
+      });
+  });
+  
+  router.get("/packages", async (req, res) => {
+    await Package.find({})
+      .then((result) => {
+        res.status(200).json({ result });
+      })
+      .catch((error) => {
+        res.status(422).json({ error });
+      });
+  });
+  
+  module.exports = router;
