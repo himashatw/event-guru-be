@@ -63,4 +63,44 @@ router.get("/packages", async (req, res) => {
     });
 });
 
+router.get("/packages/weddings", async (req, res) => {
+  await Package.find({packageType:"Wedding"})
+    .then((result) => {
+      res.status(200).json({ result });
+    })
+    .catch((error) => {
+      res.status(422).json({ error });
+    });
+});
+
+router.get("/packages/party", async (req, res) => {
+  await Package.find({packageType:"Party"})
+    .then((result) => {
+      res.status(200).json({ result });
+    })
+    .catch((error) => {
+      res.status(422).json({ error });
+    });
+});
+
+router.get("/packages/concert", async (req, res) => {
+  await Package.find({packageType:"Concert"})
+    .then((result) => {
+      res.status(200).json({ result });
+    })
+    .catch((error) => {
+      res.status(422).json({ error });
+    });
+});
+router.get("/packages/other", async (req, res) => {
+  await Package.find({packageType:"Other"})
+    .then((result) => {
+      res.status(200).json({ result });
+    })
+    .catch((error) => {
+      res.status(422).json({ error });
+    });
+});
+
+
 module.exports = router;
