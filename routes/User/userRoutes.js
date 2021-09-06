@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const User = require('../../models/User');
 const ContactUs = require('../../models/ContactUs');
+const Advertisement = require('../../models/Advertisement');
+const Payment = require('../../models/Payment');
 
 /** user login api */
 router.post('/user/login', async (req, res) => {
@@ -41,8 +43,7 @@ router.post('/user/register', async (req, res) => {
 /** logged user data retrieve api */
 router.get('/user/:id', async (req, res) => {
     const userId = req.params.id;
-    console.log("logged user id "+userId);
-    await User.find({_id:userId})
+    await User.findById(userId)
         .then(data => {
             res.status(201).send({ data: data });
         })
@@ -51,29 +52,75 @@ router.get('/user/:id', async (req, res) => {
         });
 });
 
-// /** user update api */
-// router.put('/user/register', async (req, res) => {
-//     const user = new User(req.body);
-//     await user.save()
-//         .then(data => {
-//             res.status(201).send({ data: data });
-//         })
-//         .catch(error => {
-//             res.status(400).send({ error: error.message });
-//         })
-// })
+/** user update api */
+router.put('/user/:id', async (req, res) => {
+    const userId = req.params.id;
+    await User.findByIdAndUpdate(userId,{ $set: req.body })
+        .then(data => {
+            res.status(200).send({ data: data });
+        })
+        .catch(error => {
+            res.status(400).send({ error: error.message });
+        })
+})
 
-// /** user delete api */
-// router.delete('/user/register', async (req, res) => {
-//     const user = new User(req.body);
-//     await user.save()
-//         .then(data => {
-//             res.status(201).send({ data: data });
-//         })
-//         .catch(error => {
-//             res.status(400).send({ error: error.message });
-//         })
-// })
+/** user delete api */
+router.delete('/user/:id', async (req, res) => {
+    const userId = req.params.id;
+    await User.findByIdAndDelete({_id:userId})
+        .then(() => {
+            res.status(200).send({ message : 'user deleted successfully !'});
+        })
+        .catch(error => {
+            res.status(400).send({ error: error.message });
+        })
+})
+
+/** book an event api */
+router.post('/user/book', async (req, res) => {
+    const payment = new Payment(req.body);
+    await payment.save()
+        .then(data => {
+            res.status(201).send({ data: data });
+        })
+        .catch(error => {
+            res.status(400).send({ error: error.message });
+        });
+});
+
+/** get booked event by user api */
+router.get('/user/booked/:id', async (req, res) => {
+    const userId = req.params.id;
+    await Payment.find({users:userId})
+        .then(data => {
+            res.status(200).send({ data: data })
+        }).catch(error => {
+            res.status(400).send({ error: error.message })
+        });
+});
+
+/** search api for booked event  */
+router.get('/user/booked/:name', async (req, res) => {
+    const userId = req.params.id;
+    await Advertisement.find({users:userId})
+        .then(data => {
+            res.status(200).send({ data: data })
+        }).catch(error => {
+            res.status(400).send({ error: error.message })
+        });
+});
+
+/** user payment api */
+router.post('/user/payment', async (req, res) => {
+    const payment = new Payment(req.body);
+    await payment.save()
+        .then(data => {
+            res.status(201).send({ data: data });
+        })
+        .catch(error => {
+            res.status(400).send({ error: error.message });
+        });
+});
 
 /** contactus api */
 router.post('/visitor/contactus', async (req, res) => {
