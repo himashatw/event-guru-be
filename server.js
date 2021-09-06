@@ -35,6 +35,7 @@ app.use("/api/propertyOwner", require("./routes/Owner/ownerRoutes"));
 
 //admin routes
 app.use("/api/admin", require("./routes/Admin/adminRoutes"));
+app.use("/api/admin", require("./routes/Admin/adminStatsRoutes"));
 
 app.listen(PORT, () => {
   console.log("Server is running on port : " + PORT);
