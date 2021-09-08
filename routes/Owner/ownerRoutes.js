@@ -109,5 +109,13 @@ router.get("/packages/other", async (req, res) => {
     });
 });
 
-
+//get one package details
+router.get("/packages/get/:id", async(req,res)=>{
+  await Package.findById(req.params.id)
+  .then(data =>{
+    res.status(200).send({data:data})
+  }).catch(err=>{
+    res.status(500).send({data: err.message});
+  })
+})
 module.exports = router;
