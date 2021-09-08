@@ -118,4 +118,20 @@ router.get("/packages/get/:id", async(req,res)=>{
     res.status(500).send({data: err.message});
   })
 })
+
+//update package
+// router.put("/packages/update/:id"),async(req,res)=>{
+//   await Package.findByIdAndUpdate(req.params.id, req.body, { useFindAndModify: false })
+//   .then(data=>{
+//     res.status(200).send({data:data})
+//   }).catch(err=>{
+//     console.log(err);
+//   })
+// }
+router.put('/packages/update/:id', (req, res) => {
+  Package.findByIdAndUpdate(req.params.id,
+    { $set: req.body })
+    .then(() => res.json("Updated"))
+    .catch(err => console.log(err))
+})
 module.exports = router;
