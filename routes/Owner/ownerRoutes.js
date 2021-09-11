@@ -41,6 +41,7 @@ router.post("/register", async (req, res) => {
     });
 });
 
+//get new packages
 router.post("/newpackage", async (req, res) => {
   const newPackage = new Package(req.body);
   await newPackage
@@ -53,6 +54,7 @@ router.post("/newpackage", async (req, res) => {
     });
 });
 
+//get all packagea
 router.get("/packages", async (req, res) => {
   await Package.find({})
     .then((result) => {
@@ -63,6 +65,7 @@ router.get("/packages", async (req, res) => {
     });
 });
 
+//get wedding packages
 router.get("/packages/weddings", async (req, res) => {
   await Package.find({packageType:"Wedding"})
     .then((result) => {
@@ -73,6 +76,7 @@ router.get("/packages/weddings", async (req, res) => {
     });
 });
 
+//get party packages
 router.get("/packages/party", async (req, res) => {
   await Package.find({packageType:"Party"})
     .then((result) => {
@@ -83,6 +87,7 @@ router.get("/packages/party", async (req, res) => {
     });
 });
 
+//get concert packages
 router.get("/packages/concert", async (req, res) => {
   await Package.find({packageType:"Concert"})
     .then((result) => {
@@ -92,6 +97,8 @@ router.get("/packages/concert", async (req, res) => {
       res.status(422).json({ error });
     });
 });
+
+//get other packages
 router.get("/packages/other", async (req, res) => {
   await Package.find({packageType:"Other"})
     .then((result) => {
@@ -102,5 +109,28 @@ router.get("/packages/other", async (req, res) => {
     });
 });
 
+//get one package details
+router.get("/packages/get/:id", async(req,res)=>{
+  await Package.findById(req.params.id)
+  .then(data =>{
+    res.status(200).send({data:data})
+  }).catch(err=>{
+    res.status(500).send({data: err.message});
+  })
+})
 
+//update package
+router.put('/packages/update/:id', (req, res) => {
+  Package.findByIdAndUpdate(req.params.id,
+    { $set: req.body })
+    .then(() => res.json("Updated"))
+    .catch(err => console.log(err))
+})
+
+//delete package
+router.delete('/packages/delete/:id', (req, res) => {
+  Package.findByIdAndDelete(req.params.id)
+    .then(() => res.json("deleted!"))
+    .catch(err => console.log(err))
+})
 module.exports = router;
