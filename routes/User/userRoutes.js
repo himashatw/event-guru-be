@@ -55,7 +55,7 @@ router.get('/user/:id', async (req, res) => {
 /** user update api */
 router.put('/user/:id', async (req, res) => {
     const userId = req.params.id;
-    await User.findByIdAndUpdate(userId,{ $set: req.body })
+    await User.findByIdAndUpdate(userId, req.body)
         .then(data => {
             res.status(200).send({ data: data });
         })
