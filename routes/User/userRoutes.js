@@ -55,7 +55,7 @@ router.get('/user/:id', async (req, res) => {
 /** user update api */
 router.put('/user/:id', async (req, res) => {
     const userId = req.params.id;
-    await User.findByIdAndUpdate(userId,{ $set: req.body })
+    await User.findByIdAndUpdate(userId, req.body)
         .then(data => {
             res.status(200).send({ data: data });
         })
@@ -99,10 +99,10 @@ router.get('/user/booked/:id', async (req, res) => {
         });
 });
 
-/** search api for booked event  */
-router.get('/user/booked/:name', async (req, res) => {
-    const userId = req.params.id;
-    await Advertisement.find({users:userId})
+/** get booked event details api  */
+router.get('/user/advert/:id', async (req, res) => {
+    const advertId = req.params.id;
+    await Advertisement.find({_id:advertId})
         .then(data => {
             res.status(200).send({ data: data })
         }).catch(error => {
