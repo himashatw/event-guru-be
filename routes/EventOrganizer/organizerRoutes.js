@@ -112,6 +112,56 @@ router.get('/custom/view/venue', async (req, res) => {
         }).catch(err => {
             res.send(500).send({ data: err.message });
         })
+});
+
+/**Get the package venue*/
+router.get('/custom/view/venue/:id', async (req, res) => {
+    await PropertyOwner.findById(req.params.id)
+        .then(data => {
+            res.status(200).send({ data: data })
+        }).catch(err => {
+            res.send(500).send({ data: err.message });
+        })
 })
+
+/**Get Package details for dispaly weddings offers */
+router.get('/packages/weddings', async (req, res) => {
+    await Package.find({ packageType: "Wedding" })
+        .then(data => {
+            res.status(200).send({ data: data });
+        }).catch(err => {
+            res.send(500).send({ data: err.message });
+        })
+});
+
+/**Get Package details for dispaly party offers*/
+router.get('/packages/party', async (req, res) => {
+    await Package.find({ packageType: "Party" })
+        .then(data => {
+            res.status(200).send({ data: data });
+        }).catch(err => {
+            res.send(500).send({ data: err.message });
+        })
+});
+
+/**Get Package details for dispaly show offers*/
+router.get('/packages/show', async (req, res) => {
+    await Package.find({ packageType: "Show" })
+        .then(data => {
+            res.status(200).send({ data: data });
+        }).catch(err => {
+            res.send(500).send({ data: err.message });
+        })
+});
+
+/**Get Package details for dispaly other offers*/
+router.get('/packages/other', async (req, res) => {
+    await Package.find({ packageType: "Other" })
+        .then(data => {
+            res.status(200).send({ data: data });
+        }).catch(err => {
+            res.send(500).send({ data: err.message });
+        })
+});
 
 module.exports = router;
