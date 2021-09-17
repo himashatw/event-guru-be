@@ -45,7 +45,7 @@ router.get('/user/:id', async (req, res) => {
     const userId = req.params.id;
     await User.findById(userId)
         .then(data => {
-            res.status(201).send({ data: data });
+            res.status(200).send({ data: data });
         })
         .catch(error => {
             res.status(400).send({ error: error.message });
@@ -76,6 +76,18 @@ router.delete('/user/:id', async (req, res) => {
         })
 })
 
+/** get one advert api */
+router.get('/advert/:id', async (req, res) => {
+    const advertId = req.params.id;
+    await Advertisement.findById(advertId)
+        .then(data => {
+            res.status(200).send({ data: data });
+        })
+        .catch(error => {
+            res.status(400).send({ error: error.message });
+        })
+})
+
 /** book an event api */
 router.post('/user/book', async (req, res) => {
     const payment = new Payment(req.body);
@@ -91,7 +103,7 @@ router.post('/user/book', async (req, res) => {
 /** get booked event by user api */
 router.get('/user/booked/:id', async (req, res) => {
     const userId = req.params.id;
-    await Payment.find({users:userId})
+    await Payment.findById({users:userId})
         .then(data => {
             res.status(200).send({ data: data })
         }).catch(error => {
@@ -102,7 +114,7 @@ router.get('/user/booked/:id', async (req, res) => {
 /** get booked event details api  */
 router.get('/user/advert/:id', async (req, res) => {
     const advertId = req.params.id;
-    await Advertisement.find({_id:advertId})
+    await Advertisement.findById({_id:advertId})
         .then(data => {
             res.status(200).send({ data: data })
         }).catch(error => {
