@@ -19,11 +19,6 @@ const PaymentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    state: {
-        type: String,
-        require: true,
-        default: "pending"
-    },
     users: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Users' },
     advert: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Advertisement' }
 });
