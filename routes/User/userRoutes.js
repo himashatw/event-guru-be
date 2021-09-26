@@ -45,7 +45,7 @@ router.get('/user/:id', async (req, res) => {
     const userId = req.params.id;
     await User.findById(userId)
         .then(data => {
-            res.status(201).send({ data: data });
+            res.status(200).send({ data: data });
         })
         .catch(error => {
             res.status(400).send({ error: error.message });
@@ -67,44 +67,33 @@ router.put('/user/:id', async (req, res) => {
 /** user delete api */
 router.delete('/user/:id', async (req, res) => {
     const userId = req.params.id;
-    await User.findByIdAndDelete({_id:userId})
-        .then(() => {
-            res.status(200).send({ message : 'user deleted successfully !'});
+    await User.findByIdAndDelete(userId)
+        .then((data) => {
+            res.status(200).json({ data })
         })
         .catch(error => {
             res.status(400).send({ error: error.message });
         })
 })
 
-/** book an event api */
-router.post('/user/book', async (req, res) => {
-    const payment = new Payment(req.body);
-    await payment.save()
+/** get one advert api */
+router.get('/advert/:id', async (req, res) => {
+    const advertId = req.params.id;
+    await Advertisement.findById(advertId)
         .then(data => {
-            res.status(201).send({ data: data });
+            res.status(200).json({ data });
         })
         .catch(error => {
             res.status(400).send({ error: error.message });
-        });
-});
+        })
+})
 
 /** get booked event by user api */
 router.get('/user/booked/:id', async (req, res) => {
     const userId = req.params.id;
     await Payment.find({users:userId})
         .then(data => {
-            res.status(200).send({ data: data })
-        }).catch(error => {
-            res.status(400).send({ error: error.message })
-        });
-});
-
-/** get booked event details api  */
-router.get('/user/advert/:id', async (req, res) => {
-    const advertId = req.params.id;
-    await Advertisement.find({_id:advertId})
-        .then(data => {
-            res.status(200).send({ data: data })
+            res.status(200).json({ data })
         }).catch(error => {
             res.status(400).send({ error: error.message })
         });
@@ -115,7 +104,7 @@ router.post('/user/payment', async (req, res) => {
     const payment = new Payment(req.body);
     await payment.save()
         .then(data => {
-            res.status(201).send({ data: data });
+            res.status(201).send({ data });
         })
         .catch(error => {
             res.status(400).send({ error: error.message });
