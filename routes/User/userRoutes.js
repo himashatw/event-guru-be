@@ -92,6 +92,7 @@ router.get('/advert/:id', async (req, res) => {
 router.get('/user/booked/:id', async (req, res) => {
     const userId = req.params.id;
     await Payment.find({users:userId})
+    .populate('advert')
         .then(data => {
             res.status(200).json({ data })
         }).catch(error => {
