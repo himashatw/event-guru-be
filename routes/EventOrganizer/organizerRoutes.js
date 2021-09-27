@@ -164,4 +164,14 @@ router.get('/packages/other', async (req, res) => {
         })
 });
 
+/**Search the package title */
+router.get('/packages/search/:keyword', async (req, res) => {
+    await Package.find({ packageName: { $regex: '.*' + req.params.keyword + '.*' } })
+        .then(data => {
+            res.status(200).send({ data: data });
+        }).catch(err => {
+            res.send(500).send({ data: err.message });
+        })
+});
+
 module.exports = router;
