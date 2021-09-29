@@ -28,7 +28,6 @@ const PropertyOwnerSchema = new mongoose.Schema({
   },
   accountActive: {
     type: Boolean,
-    required: true,
     default: false,
   },
   location: {
