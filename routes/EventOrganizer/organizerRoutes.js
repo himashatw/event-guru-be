@@ -173,7 +173,7 @@ router.get('/packages/search/:type/:keyword', async (req, res) => {
             res.send(500).send({ data: err.message });
         })
 });
-
+/**Find latest offers */
 router.get('/packages/latest', async (req, res) => {
     await Package.find().sort({ "updatedAt": -1 }).limit(10)
         .then(data => {
