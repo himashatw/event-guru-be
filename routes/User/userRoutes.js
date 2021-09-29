@@ -36,7 +36,7 @@ router.post('/user/register', async (req, res) => {
             res.status(201).send({ data: data });
         })
         .catch(error => {
-            res.status(400).send({ error: error.message });
+            res.status(500).send({ error: error.message });
         });
 });
 
@@ -48,7 +48,7 @@ router.get('/user/:id', async (req, res) => {
             res.status(200).send({ data: data });
         })
         .catch(error => {
-            res.status(400).send({ error: error.message });
+            res.status(500).send({ error: error.message });
         });
 });
 
@@ -60,7 +60,7 @@ router.put('/user/:id', async (req, res) => {
             res.status(200).send({ data: data });
         })
         .catch(error => {
-            res.status(400).send({ error: error.message });
+            res.status(500).send({ error: error.message });
         })
 })
 
@@ -72,7 +72,7 @@ router.delete('/user/:id', async (req, res) => {
             res.status(200).json({ data })
         })
         .catch(error => {
-            res.status(400).send({ error: error.message });
+            res.status(500).send({ error: error.message });
         })
 })
 
@@ -84,7 +84,7 @@ router.get('/advert/:id', async (req, res) => {
             res.status(200).json({ data });
         })
         .catch(error => {
-            res.status(400).send({ error: error.message });
+            res.status(500).send({ error: error.message });
         })
 })
 
@@ -92,10 +92,11 @@ router.get('/advert/:id', async (req, res) => {
 router.get('/user/booked/:id', async (req, res) => {
     const userId = req.params.id;
     await Payment.find({users:userId})
+    .populate('advert')
         .then(data => {
             res.status(200).json({ data })
         }).catch(error => {
-            res.status(400).send({ error: error.message })
+            res.status(500).send({ error: error.message })
         });
 });
 
@@ -107,7 +108,7 @@ router.post('/user/payment', async (req, res) => {
             res.status(201).send({ data });
         })
         .catch(error => {
-            res.status(400).send({ error: error.message });
+            res.status(500).send({ error: error.message });
         });
 });
 
@@ -119,7 +120,7 @@ router.post('/visitor/contactus', async (req, res) => {
             res.status(201).send({ data: data });
         })
         .catch(error => {
-            res.status(400).send({ error: error.message });
+            res.status(500).send({ error: error.message });
         });
 });
 

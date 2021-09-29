@@ -10,7 +10,7 @@ router.post('/user/enquiry', async (req, res) => {
             res.status(201).send({ data: data });
         })
         .catch(error => {
-            res.status(400).send({ error: error.message });
+            res.status(500).send({ error: error.message });
         });
 });
 
@@ -22,7 +22,7 @@ router.get('/user/enquiry/:id', async (req, res) => {
         .then(data => {
             res.status(200).send({ data: data })
         }).catch(error => {
-            res.status(400).send({ error: error.message })
+            res.status(500).send({ error: error.message })
         });
 });
 
@@ -35,7 +35,7 @@ router.delete('/user/enquiry/:id', async (req, res) => {
         .then(() => {
             res.status(200).json({ message: "enquiry deleted successfully" })
         }).catch(error => {
-            res.status(400).send({ error: error.message })
+            res.status(500).send({ error: error.message })
         });
 });
 
