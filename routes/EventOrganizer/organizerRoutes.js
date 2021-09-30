@@ -165,6 +165,25 @@ router.get('/packages/other', async (req, res) => {
 });
 
 /**Search the package title */
+router.get('/packages/search/:type/:keyword', async (req, res) => {
+    await Package.find({ packageType: req.params.type, packageName: { $regex: '.*' + req.params.keyword + '.*' } })
+        .then(data => {
+            res.status(200).send({ data: data });
+        }).catch(err => {
+            res.send(500).send({ data: err.message });
+        })
+});
+/**Find latest offers */
+router.get('/packages/latest', async (req, res) => {
+    await Package.find().sort({ "updatedAt": -1 }).limit(10)
+        .then(data => {
+            res.status(200).send({ data: data });
+        }).catch(err => {
+            res.send(500).send({ data: err.message });
+        })
+});
+
+/**Search All packages */
 router.get('/packages/search/:keyword', async (req, res) => {
     await Package.find({ packageName: { $regex: '.*' + req.params.keyword + '.*' } })
         .then(data => {
