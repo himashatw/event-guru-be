@@ -3,6 +3,7 @@ const router = express.Router();
 
 const PropertyOwner = require("../../models/PropertyOwner");
 const Package = require("../../models/Package");
+const PackageRequest = require("../../models/PackageRequest");
 
 router.post("/login", async (req, res) => {
   const email = req.body.email;
@@ -98,6 +99,7 @@ router.get("/packages/concert", async (req, res) => {
     });
 });
 
+
 //get other packages
 router.get("/packages/other", async (req, res) => {
   await Package.find({packageType:"Other"})
@@ -133,4 +135,16 @@ router.delete('/packages/delete/:id', (req, res) => {
     .then(() => res.json("deleted!"))
     .catch(err => console.log(err))
 })
+
+//view custom packages
+router.get('/package/custom/:ownerId',(req,res)=>{
+  PackageRequest.find({venue: req.params.ownerId})
+  .then((result) => {
+    res.status(200).json({ result });
+  })
+  .catch((error) => {
+    res.status(422).json({ error });
+  });
+})
+
 module.exports = router;
