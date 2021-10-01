@@ -138,7 +138,17 @@ router.delete('/packages/delete/:id', (req, res) => {
 
 //view custom packages
 router.get('/package/custom/:ownerId',(req,res)=>{
-  PackageRequest.find({venue: req.params.ownerId})
+  PackageRequest.find({venue: req.params.ownerId, approve:"pending"})
+  .then((result) => {
+    res.status(200).json({ result });
+  })
+  .catch((error) => {
+    res.status(422).json({ error });
+  });
+})
+
+router.patch(`/package/customer/:packageId`, async (req, res) => {
+  PackageRequest.findByIdAndUpdate(req.params.packageId,{approve:req.body.approvestatus})
   .then((result) => {
     res.status(200).json({ result });
   })
